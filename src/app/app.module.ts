@@ -7,16 +7,28 @@ import { AppComponent } from './app.component';
 
 import { EngineComponent } from './engine/engine.component';
 import { EngineService } from './engine/engine.service';
-import { MyNavComponent } from './my-nav/my-nav.component';
+import { AppNavComponent } from './app-nav/app-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatTreeModule,
+  MatCardModule,
+  MatMenuModule } from '@angular/material';
+
+// import { AppDashboardComponent } from './app-dashboard/app-dashboard.component';
 
 import { FirstModule } from './first/first.module';
 import { FirstComponent } from './first/first.component';
+import { DiscoverBasicElementsModule } from './discover_basic_elements/discover_basic_elements.module';
+import { DiscoverBasicElementsComponent } from './discover_basic_elements/discover_basic_elements.component';
 
 const appRoutes: Routes = [
   { path: 'engine', component: EngineComponent },
   { path: 'first', component: FirstComponent },
+  { path: 'discover_basic_elements', component: DiscoverBasicElementsComponent}
   /* { path: 'hero/:id',      component: HeroDetailComponent },
   {
     path: 'heroes',
@@ -34,7 +46,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     EngineComponent,
-    MyNavComponent
+    AppNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +61,11 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    FirstModule
+    MatTreeModule,
+    MatCardModule,
+    MatMenuModule,
+    FirstModule,
+    DiscoverBasicElementsModule,
   ],
   providers: [EngineService],
   bootstrap: [AppComponent]
