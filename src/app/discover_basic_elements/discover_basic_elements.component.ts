@@ -5,6 +5,9 @@ import 'babylonjs-materials';
 
 import { BoxService } from './box.service';
 import { SphereService } from './sphere.service';
+import { PlaneService } from './plane.service';
+import { GroundService } from './ground.service';
+
 
 @Component({
   selector: 'app-discover-basic-elements',
@@ -14,8 +17,12 @@ import { SphereService } from './sphere.service';
 export class DiscoverBasicElementsComponent implements AfterViewInit, OnDestroy {
   private canEleId1 = 'renderCanvas1';
   private canEleId2 = 'renderCanvas2';
+  private canEleId3 = 'renderCanvas3';
+  private canEleId4 = 'renderCanvas4';
+  
+  
 
-  constructor(private boxServ: BoxService, private sphereServ: SphereService) { }
+  constructor(private boxServ: BoxService, private sphereServ: SphereService, private planeServ: PlaneService, private groundServ: GroundService) { }
 
   cards = [
     { title: 'Card 1', cols: 2, rows: 1 },
@@ -30,6 +37,12 @@ export class DiscoverBasicElementsComponent implements AfterViewInit, OnDestroy 
 
     this.sphereServ.createScene(this.canEleId2);
     this.sphereServ.animate();
+
+    this.planeServ.createScene(this.canEleId3);
+    this.planeServ.animate();
+
+    this.groundServ.createScene(this.canEleId4);
+    this.groundServ.animate();
   }
 
   ngOnDestroy() {

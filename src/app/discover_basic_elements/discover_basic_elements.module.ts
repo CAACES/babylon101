@@ -5,6 +5,9 @@ import { MatButtonModule, MatIconModule, MatCardModule, MatMenuModule, MatGridLi
 import { DiscoverBasicElementsComponent } from './discover_basic_elements.component';
 import { BoxService } from './box.service';
 import { SphereService } from './sphere.service';
+import { PlaneService } from './plane.service';
+import { GroundService } from './ground.service';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +21,6 @@ import { SphereService } from './sphere.service';
     MatMenuModule,
     MatGridListModule
   ],
-  providers: [BoxService, SphereService]
+  providers: [BoxService, SphereService,PlaneService,GroundService]
 })
-export class DiscoverBasicElementsModule { }
+export class DiscoverBasicElementsModule { }``

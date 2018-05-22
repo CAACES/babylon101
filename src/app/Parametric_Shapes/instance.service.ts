@@ -1,14 +1,14 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-materials';
 
-export class FirstService {
+export class InstanceService {
   private canvas: HTMLCanvasElement;
   private engine: BABYLON.Engine;
   private camera: BABYLON.ArcRotateCamera;
   private scene: BABYLON.Scene;
   private light: BABYLON.Light;
 
-  private sphere: BABYLON.Mesh;
+  private instance: BABYLON.Mesh;
 
   createScene(elementId: string): void {
     // The first step is to get the reference of the canvas element from our HTML document
@@ -21,18 +21,51 @@ export class FirstService {
     this.scene = new BABYLON.Scene(this.engine);
 
     // Add a camera to the scene and attach it to the canvas
-    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 2, BABYLON.Vector3.Zero(), this.scene);
+    this.camera = new BABYLON.ArcRotateCamera('Camera', 0, 0, 0, BABYLON.Vector3.Zero(), this.scene);
+    this.camera.setPosition(new BABYLON.Vector3(5, 5, -5));
     this.camera.attachControl(this.canvas, true);
 
     // Add lights to the scene
-    const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
-    const light2 = new BABYLON.PointLight('light2', new BABYLON.Vector3(0, 1, -1), this.scene);
+    let light = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0, 1, 0), this.scene);
 
-    // This is where you create and manipulate meshes
-    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {}, this.scene);
+    //Array of points to construct a spiral with lines
+    let myPoints = [];
+
+    let deltaTheta = 0.1;
+    let deltaY = 0.005;
+
+    let radius = 1;
+    let theta = 0;
+    let Y = 0;
+     for (var i = 0; i<400; i++) {
+        myPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
+        theta += deltaTheta;
+        Y += deltaY
+    }
+
+    //Create lines
+    let lines = BABYLON.MeshBuilder.CreateLines("lines",{points: myPoints, updatable: true}, this.scene);
+
+    //Re-set points data and re-draw Lines
+    myPoints = [];
+
+    deltaTheta = 0.1;
+    deltaY = 0.001;
+  
+    radius = 0.25;
+    theta = 0;
+    Y = 0;
+    for (let i = 0; i<400; i++){//number of iterations stays the same
+      myPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y , radius * Math.sin(theta)));
+      theta += deltaTheta;
+      Y += deltaY;
+    }
+
+    //Update lines
+    lines = BABYLON.MeshBuilder.CreateLines("lines",{points: myPoints, instance: lines},this.scene);
 
     // generates the world x-y-z axis for better understanding
-    this.showWorldAxis(8);
+    // this.showWorldAxis(8);
   }
 
   animate(): void {

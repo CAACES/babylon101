@@ -1,14 +1,14 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-materials';
 
-export class FirstService {
+export class PlaneService {
   private canvas: HTMLCanvasElement;
   private engine: BABYLON.Engine;
   private camera: BABYLON.ArcRotateCamera;
   private scene: BABYLON.Scene;
   private light: BABYLON.Light;
 
-  private sphere: BABYLON.Mesh;
+  private plane: BABYLON.Mesh;
 
   createScene(elementId: string): void {
     // The first step is to get the reference of the canvas element from our HTML document
@@ -21,18 +21,21 @@ export class FirstService {
     this.scene = new BABYLON.Scene(this.engine);
 
     // Add a camera to the scene and attach it to the canvas
-    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 2, BABYLON.Vector3.Zero(), this.scene);
+    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 4, BABYLON.Vector3.Zero(), this.scene);
     this.camera.attachControl(this.canvas, true);
 
     // Add lights to the scene
     const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
     const light2 = new BABYLON.PointLight('light2', new BABYLON.Vector3(0, 1, -1), this.scene);
 
-    // This is where you create and manipulate meshes
-    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {}, this.scene);
+    const sourcePlane = new BABYLON.Plane(0, -1, 1, 0);
+    sourcePlane.normalize();
+
+    // Add and manipulate meshes in the scene
+    const plane = BABYLON.MeshBuilder.CreatePlane('plane', {height: 2, width: 1, sourcePlane: sourcePlane,sideOrientation: BABYLON.Mesh.DOUBLESIDE}, this.scene);
 
     // generates the world x-y-z axis for better understanding
-    this.showWorldAxis(8);
+    // this.showWorldAxis(8);
   }
 
   animate(): void {

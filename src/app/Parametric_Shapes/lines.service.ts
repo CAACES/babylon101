@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-materials';
 
-export class FirstService {
+export class LinesService {
   private canvas: HTMLCanvasElement;
   private engine: BABYLON.Engine;
   private camera: BABYLON.ArcRotateCamera;
@@ -21,18 +21,25 @@ export class FirstService {
     this.scene = new BABYLON.Scene(this.engine);
 
     // Add a camera to the scene and attach it to the canvas
-    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 2, BABYLON.Vector3.Zero(), this.scene);
+    this.camera = new BABYLON.ArcRotateCamera('Camera', 0, 0, 0, BABYLON.Vector3.Zero(), this.scene);
+    this.camera.setPosition(new BABYLON.Vector3(1, -1, -1));
     this.camera.attachControl(this.canvas, true);
 
     // Add lights to the scene
-    const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
-    const light2 = new BABYLON.PointLight('light2', new BABYLON.Vector3(0, 1, -1), this.scene);
+    const light = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0, 1, 0), this.scene);
 
-    // This is where you create and manipulate meshes
-    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {}, this.scene);
+    //Array of points to construct lines
+    const myPoints = [
+      new BABYLON.Vector3(0, 0, 0),
+      new BABYLON.Vector3(0, 1, 1),
+      new BABYLON.Vector3(0, 1, 0),
+    ];
+
+    //Create lines
+    const lines = BABYLON.MeshBuilder.CreateLines("lines",{points: myPoints}, this.scene);
 
     // generates the world x-y-z axis for better understanding
-    this.showWorldAxis(8);
+    // this.showWorldAxis(8);
   }
 
   animate(): void {

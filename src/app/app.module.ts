@@ -24,11 +24,20 @@ import { FirstModule } from './first/first.module';
 import { FirstComponent } from './first/first.component';
 import { DiscoverBasicElementsModule } from './discover_basic_elements/discover_basic_elements.module';
 import { DiscoverBasicElementsComponent } from './discover_basic_elements/discover_basic_elements.component';
+import { ParametricShapesModule } from './Parametric_Shapes/Parametric_Shapes.module';
+import { ParametricShapesComponent } from './Parametric_Shapes/Parametric_Shapes.component';
+import { PositionandRotationModule } from './Position_and_Rotation/Position_and_Rotation.module';
+import { PositionandRotationComponent } from './Position_and_Rotation/Position_and_Rotation.component';
 
 const appRoutes: Routes = [
   { path: 'engine', component: EngineComponent },
   { path: 'first', component: FirstComponent },
-  { path: 'discover_basic_elements', component: DiscoverBasicElementsComponent}
+  { path: 'discover_basic_elements', component: DiscoverBasicElementsComponent},
+  { path: 'parametric_shapes', component: ParametricShapesComponent},
+  { path: 'position_and_rotation', component: PositionandRotationComponent},
+  
+  
+  
   /* { path: 'hero/:id',      component: HeroDetailComponent },
   {
     path: 'heroes',
@@ -66,6 +75,8 @@ const appRoutes: Routes = [
     MatMenuModule,
     FirstModule,
     DiscoverBasicElementsModule,
+    ParametricShapesModule,
+    PositionandRotationModule
   ],
   providers: [EngineService],
   bootstrap: [AppComponent]
