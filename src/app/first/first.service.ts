@@ -32,7 +32,7 @@ export class FirstService {
     const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {}, this.scene);
 
     // generates the world x-y-z axis for better understanding
-    this.showWorldAxis(8);
+    // this.showWorldAxis(8);
   }
 
   animate(): void {
