@@ -11,7 +11,7 @@ export class PositionService {
   private sphere: BABYLON.Mesh;
 
   createScene(elementId: string): void {
-    // // The first step is to get the reference of the canvas element from our HTML document 11
+    // // The first step is to get the reference of the canvas element from our HTML document 111
     this.canvas = <HTMLCanvasElement>document.getElementById(elementId);
 
     // // Then, load the Babylon 3D engine:
