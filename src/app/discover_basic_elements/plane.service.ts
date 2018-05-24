@@ -22,7 +22,7 @@ export class PlaneService {
 
     // Add a camera to the scene and attach it to the canvas
     this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 4, BABYLON.Vector3.Zero(), this.scene);
-    this.camera.attachControl(this.canvas, true);
+    this.camera.attachControl(this.canvas, false);
 
     // Add lights to the scene
     const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
@@ -33,7 +33,12 @@ export class PlaneService {
 
     // Add and manipulate meshes in the scene
     const plane = BABYLON.MeshBuilder.CreatePlane('plane', {
+<<<<<<< HEAD
       height: 2, width: 1, sourcePlane: sourcePlane, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, this.scene);
+=======
+      height: 2, width: 1, sourcePlane: sourcePlane, sideOrientation: BABYLON.Mesh.DOUBLESIDE
+    }, this.scene);
+>>>>>>> c789460e3b75e42bbaa7de91d705c5f32907db2f
 
     // generates the world x-y-z axis for better understanding
     // this.showWorldAxis(8);

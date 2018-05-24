@@ -22,7 +22,7 @@ export class BoxService {
 
     // Add a camera to the scene and attach it to the canvas
     this.camera = new BABYLON.ArcRotateCamera('Camera', 3 * Math.PI / 4, Math.PI / 4, 4, BABYLON.Vector3.Zero(), this.scene);
-    this.camera.attachControl(this.canvas, true);
+    this.camera.attachControl(this.canvas, false);
 
     // Add lights to the scene
     const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
