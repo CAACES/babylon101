@@ -81,13 +81,13 @@ localAxes(size: number){
   ], this.scene);
   pilot_local_axisY.color = new BABYLON.Color3(0, 1, 0);
 
-  let pilot_local_axisZ = BABYLON.Mesh.CreateLines("pilot_local_axisZ", [
-    BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(-0.05 * size, size * 0.95, 0),
-    new BABYLON.Vector3(0, 0, size),new BABYLON.Vector3(0.05 * size, size * 0.95,0)
-  ], this.scene);
-  pilot_local_axisZ.color = new BABYLON.Color3(0, 1, 0);
+  // let pilot_local_axisZ = BABYLON.Mesh.CreateLines("pilot_local_axisZ", [
+  //   BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(-0.05 * size, size * 0.95, 0),
+  //   new BABYLON.Vector3(0, 0, size),new BABYLON.Vector3(0.05 * size, size * 0.95,0)
+  // ], this.scene);
+  // pilot_local_axisZ.color = new BABYLON.Color3(0, 1, 0);
 
-   pilot_local_axisZ = BABYLON.Mesh.CreateLines("pilot_local_axisZ",[
+   let pilot_local_axisZ = BABYLON.Mesh.CreateLines("pilot_local_axisZ",[
     BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, 0.05 * size, size * 0.95),
     new BABYLON.Vector3(0, 0, size), new BABYLON.Vector3(0, 0.05 * size, size * 0.95)
   ], this.scene);
