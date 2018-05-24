@@ -28,15 +28,15 @@ export class LinesService {
     // Add lights to the scene
     const light = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0, 1, 0), this.scene);
 
-    //Array of points to construct lines
+    // Array of points to construct lines
     const myPoints = [
       new BABYLON.Vector3(0, 0, 0),
       new BABYLON.Vector3(0, 1, 1),
       new BABYLON.Vector3(0, 1, 0),
     ];
 
-    //Create lines
-    const lines = BABYLON.MeshBuilder.CreateLines("lines",{points: myPoints}, this.scene);
+    // Create lines
+    const lines = BABYLON.MeshBuilder.CreateLines('lines', { points: myPoints}, this.scene);
 
     // generates the world x-y-z axis for better understanding
     // this.showWorldAxis(8);

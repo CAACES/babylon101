@@ -21,6 +21,9 @@ import { GroundService } from './ground.service';
     MatMenuModule,
     MatGridListModule
   ],
-  providers: [BoxService, SphereService,PlaneService,GroundService]
+  providers: [BoxService, SphereService,
+    PlaneService,
+    GroundService
+  ]
 })
-export class DiscoverBasicElementsModule { }``
+export class DiscoverBasicElementsModule { }

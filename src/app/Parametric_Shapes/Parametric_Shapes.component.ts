@@ -6,12 +6,12 @@ import 'babylonjs-materials';
 import { LinesService } from './lines.service';
 import { SpiralService } from './spiral.service';
 import { DashedService } from './dashed.service';
-import { InstanceService } from './instance.service';;
+import { InstanceService } from './instance.service';
 
 
 
 @Component({
-  selector: 'app-Parametric-Shapes',
+  selector: 'app-parametric-shapes',
   templateUrl: './Parametric_Shapes.html',
   styleUrls: ['./Parametric_Shapes.css']
 })
@@ -20,13 +20,18 @@ export class ParametricShapesComponent implements AfterViewInit, OnDestroy {
   private canEleId6 = 'renderCanvas6';
   private canEleId7 = 'renderCanvas7';
   private canEleId8 = 'renderCanvas8';
-  
-  
 
-  
-  
 
-  constructor(private linesServ: LinesService, private spiralServ: SpiralService, private dashedServ: DashedService, private instanceServ: InstanceService) { }
+
+
+
+
+  constructor(
+      private linesServ: LinesService,
+      private spiralServ: SpiralService,
+      private dashedServ: DashedService,
+      private instanceServ: InstanceService
+    ) { }
 
   cards = [
     { title: 'Card 1', cols: 2, rows: 1 },
@@ -45,7 +50,7 @@ export class ParametricShapesComponent implements AfterViewInit, OnDestroy {
     this.instanceServ.createScene(this.canEleId8);
     this.instanceServ.animate();
 
-    
+
   }
 
   ngOnDestroy() {

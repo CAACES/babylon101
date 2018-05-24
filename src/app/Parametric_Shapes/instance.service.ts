@@ -26,9 +26,9 @@ export class InstanceService {
     this.camera.attachControl(this.canvas, true);
 
     // Add lights to the scene
-    let light = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0, 1, 0), this.scene);
+    const light = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0, 1, 0), this.scene);
 
-    //Array of points to construct a spiral with lines
+    // Array of points to construct a spiral with lines
     let myPoints = [];
 
     let deltaTheta = 0.1;
@@ -37,32 +37,31 @@ export class InstanceService {
     let radius = 1;
     let theta = 0;
     let Y = 0;
-     for (var i = 0; i<400; i++) {
+     for (let i = 0; i < 400; i++) {
         myPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
         theta += deltaTheta;
-        Y += deltaY
+        Y += deltaY;
     }
 
-    //Create lines
-    let lines = BABYLON.MeshBuilder.CreateLines("lines",{points: myPoints, updatable: true}, this.scene);
+    // Create lines
+    let lines = BABYLON.MeshBuilder.CreateLines('lines', { points: myPoints, updatable: true}, this.scene);
 
-    //Re-set points data and re-draw Lines
+    // Re-set points data and re-draw Lines
     myPoints = [];
 
     deltaTheta = 0.1;
     deltaY = 0.001;
-  
     radius = 0.25;
     theta = 0;
     Y = 0;
-    for (let i = 0; i<400; i++){//number of iterations stays the same
+    for (let i = 0; i < 400; i++) {// number of iterations stays the same
       myPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y , radius * Math.sin(theta)));
       theta += deltaTheta;
       Y += deltaY;
     }
 
-    //Update lines
-    lines = BABYLON.MeshBuilder.CreateLines("lines",{points: myPoints, instance: lines},this.scene);
+    // Update lines
+    lines = BABYLON.MeshBuilder.CreateLines('lines', {points: myPoints, instance: lines}, this.scene);
 
     // generates the world x-y-z axis for better understanding
     // this.showWorldAxis(8);

@@ -19,10 +19,13 @@ export class DiscoverBasicElementsComponent implements AfterViewInit, OnDestroy 
   private canEleId2 = 'renderCanvas2';
   private canEleId3 = 'renderCanvas3';
   private canEleId4 = 'renderCanvas4';
-  
-  
 
-  constructor(private boxServ: BoxService, private sphereServ: SphereService, private planeServ: PlaneService, private groundServ: GroundService) { }
+  constructor(
+    private boxServ: BoxService,
+    private sphereServ: SphereService,
+    private planeServ: PlaneService,
+    private groundServ: GroundService
+  ) { }
 
   cards = [
     { title: 'Card 1', cols: 2, rows: 1 },

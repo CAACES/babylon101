@@ -9,16 +9,13 @@ import { RotationService } from './rotation.service';
 
 
 @Component({
-  selector: 'app-Position-and-Rotation',
+  selector: 'app-position-and-rotation',
   templateUrl: './Position_and_Rotation.html',
   styleUrls: ['./Position_and_Rotation.css']
 })
 export class PositionandRotationComponent implements AfterViewInit, OnDestroy {
   private canEleId9 = 'renderCanvas9';
   private canEleId10 = 'renderCanvas10';
-  
-  
-  
   constructor(private positionServ: PositionService, private rotationServ: RotationService) { }
 
   cards = [
@@ -33,7 +30,6 @@ export class PositionandRotationComponent implements AfterViewInit, OnDestroy {
     this.positionServ.animate();
     this.rotationServ.createScene(this.canEleId10);
     this.rotationServ.animate();
-  
   }
 
   ngOnDestroy() {

@@ -28,23 +28,23 @@ export class DashedService {
     // Add lights to the scene
     const light = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0, 1, 0), this.scene);
 
-    //Array of points to construct a dashed with lines
-    let myPoints = [];
+    // Array of points to construct a dashed with lines
+    const myPoints = [];
 
-    let deltaTheta = 0.1;
-    let deltaY = 0.005;
+    const deltaTheta = 0.1;
+    const deltaY = 0.005;
 
-    let radius = 1;
+    const radius = 1;
     let theta = 0;
     let Y = 0;
-     for (var i = 0; i<400; i++) {
+     for (let i = 0; i < 400; i++) {
         myPoints.push(new BABYLON.Vector3(radius * Math.cos(theta), Y, radius * Math.sin(theta)));
         theta += deltaTheta;
-        Y += deltaY
+        Y += deltaY;
     }
 
-    //Create lines
-    let lines = BABYLON.MeshBuilder.CreateDashedLines("lines",{points: myPoints, dashNb:400}, this.scene);
+    // Create lines
+    const lines = BABYLON.MeshBuilder.CreateDashedLines('lines', {points: myPoints, dashNb: 400}, this.scene);
 
     // generates the world x-y-z axis for better understanding
     // this.showWorldAxis(8);
