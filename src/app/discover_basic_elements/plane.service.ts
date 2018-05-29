@@ -33,12 +33,8 @@ export class PlaneService {
 
     // Add and manipulate meshes in the scene
     const plane = BABYLON.MeshBuilder.CreatePlane('plane', {
-<<<<<<< HEAD
-      height: 2, width: 1, sourcePlane: sourcePlane, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, this.scene);
-=======
       height: 2, width: 1, sourcePlane: sourcePlane, sideOrientation: BABYLON.Mesh.DOUBLESIDE
     }, this.scene);
->>>>>>> c789460e3b75e42bbaa7de91d705c5f32907db2f
 
     // generates the world x-y-z axis for better understanding
     // this.showWorldAxis(8);

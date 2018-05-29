@@ -23,7 +23,7 @@ export class DashedService {
     // Add a camera to the scene and attach it to the canvas
     this.camera = new BABYLON.ArcRotateCamera('Camera', 0, 0, 0, BABYLON.Vector3.Zero(), this.scene);
     this.camera.setPosition(new BABYLON.Vector3(5, 5, -5));
-    this.camera.attachControl(this.canvas, true);
+    this.camera.attachControl(this.canvas, false);
 
     // Add lights to the scene
     const light = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0, 1, 0), this.scene);

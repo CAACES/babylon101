@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-materials';
 
-export class SphereService {
+export class PointsService {
   private canvas: HTMLCanvasElement;
   private engine: BABYLON.Engine;
   private camera: BABYLON.ArcRotateCamera;
@@ -20,17 +20,21 @@ export class SphereService {
     // Create the scene space
     this.scene = new BABYLON.Scene(this.engine);
 
+    const light = new BABYLON.HemisphericLight('HemiLight', new BABYLON.Vector3(0, 0, 0), this.scene);
+
     // Add a camera to the scene and attach it to the canvas
-    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 4, BABYLON.Vector3.Zero(), this.scene);
+    this.camera = new BABYLON.ArcRotateCamera('Camera1', 0, 0, 0, new BABYLON.Vector3(0, 0, 0), this.scene);
+    this.camera.setPosition(new BABYLON.Vector3(0, 5, -30));
     this.camera.attachControl(this.canvas, false);
-    // Add lights to the scene
-    const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
-    const light2 = new BABYLON.PointLight('light2', new BABYLON.Vector3(0, 1, -1), this.scene);
 
-    // Add and manipulate meshes in the scene
-    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameterX: 1, diameterY: 0.75, diameterZ: 0.25}, this.scene);
+    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameter: 10}, this.scene);
 
-    // generates the world x-y-z axis for better understanding
+    const pointsMaterial = new BABYLON.StandardMaterial('Material', this.scene);
+    pointsMaterial.pointsCloud = true;
+    pointsMaterial.pointSize = 2;
+    pointsMaterial.diffuseColor = BABYLON.Color3.Red();
+    sphere.material = pointsMaterial;
+
     // this.showWorldAxis(8);
   }
 

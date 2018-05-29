@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-materials';
 
-export class SphereService {
+export class DiffuseService {
   private canvas: HTMLCanvasElement;
   private engine: BABYLON.Engine;
   private camera: BABYLON.ArcRotateCamera;
@@ -21,16 +21,80 @@ export class SphereService {
     this.scene = new BABYLON.Scene(this.engine);
 
     // Add a camera to the scene and attach it to the canvas
-    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 4, BABYLON.Vector3.Zero(), this.scene);
+    this.camera = new BABYLON.ArcRotateCamera('Camera', -Math.PI / 2, 3 * Math.PI / 16, 15, BABYLON.Vector3.Zero(), this.scene);
     this.camera.attachControl(this.canvas, false);
-    // Add lights to the scene
-    const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
-    const light2 = new BABYLON.PointLight('light2', new BABYLON.Vector3(0, 1, -1), this.scene);
 
-    // Add and manipulate meshes in the scene
-    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameterX: 1, diameterY: 0.75, diameterZ: 0.25}, this.scene);
+    const mats = [
+      new BABYLON.Color3(1, 1, 0),
+      new BABYLON.Color3(1, 0, 1),
+      new BABYLON.Color3(0, 1, 1),
+      new BABYLON.Color3(1, 1, 1)
+    ];
 
-    // generates the world x-y-z axis for better understanding
+    const redMat = new BABYLON.StandardMaterial('redMat', this.scene);
+    redMat.emissiveColor = new BABYLON.Color3(1, 0, 0);
+
+    const greenMat = new BABYLON.StandardMaterial('greenMat', this.scene);
+    greenMat.emissiveColor = new BABYLON.Color3(0, 1, 0);
+
+    const blueMat = new BABYLON.StandardMaterial('blueMat', this.scene);
+    blueMat.emissiveColor = new BABYLON.Color3(0, 0, 1);
+
+    const whiteMat = new BABYLON.StandardMaterial('whiteMat', this.scene);
+    whiteMat.emissiveColor = new BABYLON.Color3(1, 1, 1);
+
+    // groundMat.maxSimultaneousLights = 16;
+
+    for ( let i = 0; i < 4; i++ ) {
+      // red light
+      const lightRed = new BABYLON.SpotLight('spotLight',
+        new BABYLON.Vector3(-Math.cos(Math.PI / 6) - 2.5 + 5 * (i % 2), 1, - Math.sin(Math.PI / 6) + 3.5 - 7 * (Math.floor (i / 2))),
+        new BABYLON.Vector3(0, -1, 0), Math.PI / 2, 1.5, this.scene);
+      lightRed.diffuse = new BABYLON.Color3(1, 0, 0);
+      // green light
+      const lightGreen = new BABYLON.SpotLight('spotLight1',
+        new BABYLON.Vector3(-2.5 + 5 * (i % 2), 1, - Math.sin(Math.PI / 6) + 4.5 - 7 * (Math.floor(i / 2))),
+        new BABYLON.Vector3(0, -1, 0), Math.PI / 2, 1.5, this.scene);
+      lightGreen.diffuse = new BABYLON.Color3(0, 1, 0);
+      // blue light
+      const lightBlue = new BABYLON.SpotLight('spotLight2',
+        new BABYLON.Vector3(Math.cos(Math.PI / 6) - 2.5 + 5 * (i % 2), 1, - Math.sin(Math.PI / 6) + 3.5 - 7 * (Math.floor(i / 2))),
+        new BABYLON.Vector3(0, -1, 0), Math.PI / 2, 1.5, this.scene);
+      lightBlue.diffuse = new BABYLON.Color3(0, 0, 1);
+      // white light
+      const lightWhite = new BABYLON.SpotLight('spotLight3',
+        new BABYLON.Vector3(-2.5 + 5 * (i % 2), 1, 6.5 - 7 * (Math.floor(i / 2))),
+        new BABYLON.Vector3(0, -1, 0), Math.PI / 2, 1.5, this.scene);
+      lightWhite.diffuse = new BABYLON.Color3(1, 1, 1);
+
+      const redSphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameter: 0.25}, this.scene);
+      redSphere.material = redMat;
+      redSphere.position = lightRed.position;
+
+      const greenSphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameter: 0.25}, this.scene);
+      greenSphere.material = greenMat;
+      greenSphere.position = lightGreen.position;
+
+      const blueSphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameter: 0.25}, this.scene);
+      blueSphere.material = blueMat;
+      blueSphere.position = lightBlue.position;
+
+      const whiteSphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameter: 0.25}, this.scene);
+      whiteSphere.material = whiteMat;
+      whiteSphere.position = lightWhite.position;
+
+      const groundMat = new BABYLON.StandardMaterial('groundmat', this.scene);
+      groundMat.diffuseColor = mats[i];
+
+      groundMat.maxSimultaneousLights = 16;
+      const ground = BABYLON.MeshBuilder.CreateGround('ground', {width: 4, height: 6}, this.scene);
+      ground.position.x = -2.5 + 5 * (i % 2);
+      ground.position.z = 4.5 - 7 * (Math.floor(i / 2));
+      ground.material = groundMat;
+    }
+
+
+
     // this.showWorldAxis(8);
   }
 

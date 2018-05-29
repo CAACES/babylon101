@@ -28,6 +28,10 @@ import { ParametricShapesModule } from './Parametric_Shapes/Parametric_Shapes.mo
 import { ParametricShapesComponent } from './Parametric_Shapes/Parametric_Shapes.component';
 import { PositionandRotationModule } from './Position_and_Rotation/Position_and_Rotation.module';
 import { PositionandRotationComponent } from './Position_and_Rotation/Position_and_Rotation.component';
+import { MaterialsModule } from './materials/materials.module';
+import { MaterialsComponent } from './materials/materials.component';
+import { CamerasModule } from './cameras/cameras.module';
+import { CamerasComponent } from './cameras/cameras.component';
 
 const appRoutes: Routes = [
   { path: 'engine', component: EngineComponent },
@@ -35,9 +39,11 @@ const appRoutes: Routes = [
   { path: 'discover_basic_elements', component: DiscoverBasicElementsComponent},
   { path: 'parametric_shapes', component: ParametricShapesComponent},
   { path: 'position_and_rotation', component: PositionandRotationComponent},
-  
-  
-  
+  { path: 'materials', component: MaterialsComponent},
+  { path: 'cameras', component: CamerasComponent},
+
+
+
   /* { path: 'hero/:id',      component: HeroDetailComponent },
   {
     path: 'heroes',
@@ -76,7 +82,9 @@ const appRoutes: Routes = [
     FirstModule,
     DiscoverBasicElementsModule,
     ParametricShapesModule,
-    PositionandRotationModule
+    PositionandRotationModule,
+    MaterialsModule,
+    CamerasModule
   ],
   providers: [EngineService],
   bootstrap: [AppComponent]

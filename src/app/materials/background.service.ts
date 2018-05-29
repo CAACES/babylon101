@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-materials';
 
-export class SphereService {
+export class BackgroundService {
   private canvas: HTMLCanvasElement;
   private engine: BABYLON.Engine;
   private camera: BABYLON.ArcRotateCamera;
@@ -21,16 +21,27 @@ export class SphereService {
     this.scene = new BABYLON.Scene(this.engine);
 
     // Add a camera to the scene and attach it to the canvas
-    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 4, BABYLON.Vector3.Zero(), this.scene);
+    // this.camera = new BABYLON.ArcRotateCamera('Camera', 3 * Math.PI / 2, Math.PI / 2, 5, BABYLON.Vector3.Zero(), this.scene);
+    this.camera = new BABYLON.ArcRotateCamera('Camera', 13 * Math.PI / 2, Math.PI / 4, 5, BABYLON.Vector3.Zero(), this.scene);
     this.camera.attachControl(this.canvas, false);
-    // Add lights to the scene
-    const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
-    const light2 = new BABYLON.PointLight('light2', new BABYLON.Vector3(0, 1, -1), this.scene);
 
-    // Add and manipulate meshes in the scene
-    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameterX: 1, diameterY: 0.75, diameterZ: 0.25}, this.scene);
+    const light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), this.scene);
+    light.intensity = 0.7;
 
-    // generates the world x-y-z axis for better understanding
+    const p1 = new BABYLON.PointLight('p1', BABYLON.Vector3.Zero(), this.scene);
+    p1.diffuse = new BABYLON.Color3(1, 1, 1);
+    p1.specular = new BABYLON.Color3(1, 1, 1);
+    p1.intensity = 0.8;
+
+    const mat = new BABYLON.StandardMaterial('dog', this.scene);
+    mat.diffuseTexture = new BABYLON.Texture(
+        'https://upload.wikimedia.org/wikipedia/commons/8/87/Alaskan_Malamute%2BBlank.png', this.scene);
+    mat.diffuseTexture.hasAlpha = true;
+    // mat.backFaceCulling = false;
+    mat.backFaceCulling = true;
+    const box = BABYLON.MeshBuilder.CreateBox('box', { }, this.scene);
+    box.material = mat;
+
     // this.showWorldAxis(8);
   }
 

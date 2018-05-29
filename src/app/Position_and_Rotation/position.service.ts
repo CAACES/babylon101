@@ -25,7 +25,7 @@ export class PositionService {
     // Add a camera to the scene and attach it to the canvas
     this.camera = new BABYLON.ArcRotateCamera('Camera', 0, 0, 0, new BABYLON.Vector3(2, 3, 4), this.scene);
     this.camera.setPosition(new BABYLON.Vector3(10, 3, -10));
-    this.camera.attachControl(this.canvas, true);
+    this.camera.attachControl(this.canvas, false);
 
     // Add lights to the scene
     const light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 0.5, 0), this.scene);

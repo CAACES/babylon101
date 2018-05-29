@@ -5,6 +5,7 @@ import 'babylonjs-materials';
 
 import { PositionService } from './position.service';
 import { RotationService } from './rotation.service';
+import { SequencingService } from './sequencing.service';
 
 
 
@@ -16,7 +17,12 @@ import { RotationService } from './rotation.service';
 export class PositionandRotationComponent implements AfterViewInit, OnDestroy {
   private canEleId9 = 'renderCanvas9';
   private canEleId10 = 'renderCanvas10';
-  constructor(private positionServ: PositionService, private rotationServ: RotationService) { }
+  private canEleId11 = 'renderCanvas11';
+  constructor(
+      private positionServ: PositionService,
+      private rotationServ: RotationService,
+      private sequencingServ: SequencingService,
+    ) { }
 
   cards = [
     { title: 'Card 1', cols: 2, rows: 1 },
@@ -30,6 +36,8 @@ export class PositionandRotationComponent implements AfterViewInit, OnDestroy {
     this.positionServ.animate();
     this.rotationServ.createScene(this.canEleId10);
     this.rotationServ.animate();
+    this.sequencingServ.createScene(this.canEleId11);
+    this.sequencingServ.animate();
   }
 
   ngOnDestroy() {

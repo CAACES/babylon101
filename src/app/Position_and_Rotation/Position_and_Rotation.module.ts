@@ -5,6 +5,8 @@ import { MatButtonModule, MatIconModule, MatCardModule, MatMenuModule, MatGridLi
 import { PositionandRotationComponent } from './Position_and_Rotation.component';
 import { PositionService } from './position.service';
 import { RotationService } from './rotation.service';
+import { SequencingService } from './sequencing.service';
+
 
 
 
@@ -22,7 +24,7 @@ import { RotationService } from './rotation.service';
     MatMenuModule,
     MatGridListModule
   ],
-  providers: [PositionService, RotationService]
+  providers: [PositionService, RotationService, SequencingService]
 })
 export class PositionandRotationModule { }
 

@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-materials';
 
-export class SphereService {
+export class UniversalService {
   private canvas: HTMLCanvasElement;
   private engine: BABYLON.Engine;
   private camera: BABYLON.ArcRotateCamera;
@@ -15,22 +15,57 @@ export class SphereService {
     this.canvas = <HTMLCanvasElement>document.getElementById(elementId);
 
     // Then, load the Babylon 3D engine:
-    this.engine = new BABYLON.Engine(this.canvas,  true);
+    this.engine = new BABYLON.Engine(this.canvas, true);
 
     // Create the scene space
     this.scene = new BABYLON.Scene(this.engine);
 
-    // Add a camera to the scene and attach it to the canvas
-    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 4, BABYLON.Vector3.Zero(), this.scene);
+    // This creates and positions a universal camera (non-mesh)
+    const camera = new BABYLON.UniversalCamera('Camera', new BABYLON.Vector3(0, 0, -10), this.scene);
+
+    // This yargets the camera to scene origin
+    this.camera.setTarget(BABYLON.Vector3.Zero());
+
+    // This attaches the camera to the canvas
     this.camera.attachControl(this.canvas, false);
-    // Add lights to the scene
-    const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
-    const light2 = new BABYLON.PointLight('light2', new BABYLON.Vector3(0, 1, -1), this.scene);
 
-    // Add and manipulate meshes in the scene
-    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameterX: 1, diameterY: 0.75, diameterZ: 0.25}, this.scene);
+    // This crastes a light, aiming 0, 1, 0 - to the sky (non-mesh)
+    const light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), this.scene);
 
-    // generates the world x-y-z axis for better understanding
+    // Materils
+    const redMat = new BABYLON.StandardMaterial('red', this.scene);
+    redMat.diffuseColor = new BABYLON.Color3(255, 0 , 0); // 漫反射颜色
+    redMat.emissiveColor = new BABYLON.Color3(255, 0, 0); // 环境光颜色
+    redMat.specularColor = new BABYLON.Color3(255, 0, 0); // 高光颜色
+
+    const greenMat = new BABYLON.StandardMaterial('green', this.scene);
+    greenMat.diffuseColor = new BABYLON.Color3(0, 255 , 0);
+    greenMat.emissiveColor = new BABYLON.Color3(0, 255 , 0);
+    greenMat.specularColor = new BABYLON.Color3(0, 255 , 0);
+
+    const blueMat = new BABYLON.StandardMaterial('blue', this.scene);
+    blueMat.diffuseColor = new BABYLON.Color3(0, 0 , 255);
+    blueMat.emissiveColor = new BABYLON.Color3(0, 0 , 255);
+    blueMat.specularColor = new BABYLON.Color3(0, 0 , 255);
+
+    // Shapes
+    const plane1 = BABYLON.Mesh.CreatePlane('plane1', 3, this.scene, true, BABYLON.Mesh.DOUBLESIDE);
+    plane1.position.x = -3;
+    plane1.position.z = 0;
+    plane1.material = redMat;
+
+    const plane2 = BABYLON.Mesh.CreatePlane('plane2', 3, this.scene, true, BABYLON.Mesh.DOUBLESIDE);
+    plane1.position.x = 3;
+    plane1.position.z = -1.5;
+    plane1.material = greenMat;
+
+    const plane3 = BABYLON.Mesh.CreatePlane('plane3', 3, this.scene, true, BABYLON.Mesh.DOUBLESIDE);
+    plane1.position.x = 3;
+    plane1.position.z = 0;
+    plane1.material = blueMat;
+
+    const ground = BABYLON.Mesh.CreateGround('ground', 10, 10, 2, this.scene);
+
     // this.showWorldAxis(8);
   }
 

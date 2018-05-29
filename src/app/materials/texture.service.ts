@@ -1,7 +1,7 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-materials';
 
-export class SphereService {
+export class TextureService {
   private canvas: HTMLCanvasElement;
   private engine: BABYLON.Engine;
   private camera: BABYLON.ArcRotateCamera;
@@ -21,16 +21,42 @@ export class SphereService {
     this.scene = new BABYLON.Scene(this.engine);
 
     // Add a camera to the scene and attach it to the canvas
-    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 4, BABYLON.Vector3.Zero(), this.scene);
+    this.camera = new BABYLON.ArcRotateCamera('Camera', -Math.PI / 2, Math.PI / 4, 5, BABYLON.Vector3.Zero(), this.scene);
     this.camera.attachControl(this.canvas, false);
-    // Add lights to the scene
-    const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
-    const light2 = new BABYLON.PointLight('light2', new BABYLON.Vector3(0, 1, -1), this.scene);
 
-    // Add and manipulate meshes in the scene
-    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameterX: 1, diameterY: 0.75, diameterZ: 0.25}, this.scene);
+    this.scene.ambientColor = new BABYLON.Color3(1, 1, 1);
 
-    // generates the world x-y-z axis for better understanding
+    // Light direction is up and left
+    const light = new BABYLON.HemisphericLight('hemiLight', new BABYLON.Vector3(-1, 1, 0), this.scene);
+    light.diffuse = new BABYLON.Color3(1, 0, 0);
+    light.specular = new BABYLON.Color3(0, 1, 0);
+    light.groundColor = new BABYLON.Color3(0, 1, 0);
+
+    const grass0 = new BABYLON.StandardMaterial('grass0', this.scene);
+    grass0.emissiveTexture = new BABYLON.Texture('textures/grass.png', this.scene);
+
+    const grass1 = new BABYLON.StandardMaterial('grass1', this.scene);
+    grass1.emissiveTexture = new BABYLON.Texture('textures/grass.png', this.scene);
+
+    const grass2 = new BABYLON.StandardMaterial('grass2', this.scene);
+    grass2.ambientTexture = new BABYLON.Texture('textures/grass.png', this.scene);
+    grass2.diffuseColor = new BABYLON.Color3(1, 0, 0);
+
+    // diffuse texture
+    const sphere0 = BABYLON.MeshBuilder.CreateSphere('sphere0', { }, this.scene);
+    sphere0.position.x = -1.5;
+    sphere0.material = grass0;
+
+    // emissive texture
+    const sphere1 = BABYLON.MeshBuilder.CreateSphere('sphere1', { }, this.scene);
+    sphere1.material = grass1;
+
+    // Green Ambient
+    const sphere2 = BABYLON.MeshBuilder.CreateSphere('sphere2', { }, this.scene);
+    sphere2.material = grass2;
+    sphere2.position.x = 1.5;
+
+
     // this.showWorldAxis(8);
   }
 

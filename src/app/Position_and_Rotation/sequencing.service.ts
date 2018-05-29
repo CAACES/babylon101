@@ -1,14 +1,14 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-materials';
 
-export class SphereService {
+export class SequencingService {
   private canvas: HTMLCanvasElement;
   private engine: BABYLON.Engine;
   private camera: BABYLON.ArcRotateCamera;
   private scene: BABYLON.Scene;
   private light: BABYLON.Light;
 
-  private sphere: BABYLON.Mesh;
+  private box: BABYLON.Mesh;
 
   createScene(elementId: string): void {
     // The first step is to get the reference of the canvas element from our HTML document
@@ -21,18 +21,51 @@ export class SphereService {
     this.scene = new BABYLON.Scene(this.engine);
 
     // Add a camera to the scene and attach it to the canvas
-    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI / 2, Math.PI / 2, 4, BABYLON.Vector3.Zero(), this.scene);
+    this.camera = new BABYLON.ArcRotateCamera('Camera', Math.PI , Math.PI / 8, 150, BABYLON.Vector3.Zero(), this.scene);
     this.camera.attachControl(this.canvas, false);
+
     // Add lights to the scene
-    const light1 = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(1, 1, 0), this.scene);
-    const light2 = new BABYLON.PointLight('light2', new BABYLON.Vector3(0, 1, -1), this.scene);
+    const light = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0, 1, 0), this.scene);
+    // Creation of 3 boxes and 2 spheres
+    const box1 = BABYLON.Mesh.CreateBox('Box1', 6.0, this.scene);
+    const box2 = BABYLON.Mesh.CreateBox('Box2', 6.0, this.scene);
+    const box3 = BABYLON.Mesh.CreateBox('Box3', 6.0, this.scene);
+    const box4 = BABYLON.Mesh.CreateBox('Box4', 6.0, this.scene);
+    const box5 = BABYLON.Mesh.CreateBox('Box5', 6.0, this.scene);
+    const box6 = BABYLON.Mesh.CreateBox('Box6', 6.0, this.scene);
+    const box7 = BABYLON.Mesh.CreateBox('Box7', 6.0, this.scene);
+   // Moving boxes on the x axis
+    box1.position.x = -20;
+    box2.position.x = -10;
+    box3.position.x = 0;
+    box4.position.x = 15;
+    box5.position.x = 30;
+    box6.position.x = 45;
 
-    // Add and manipulate meshes in the scene
-    const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {diameterX: 1, diameterY: 0.75, diameterZ: 0.25}, this.scene);
+    // Rotate box around the x axis
+    box1.rotation.x = Math.PI / 6;
 
-    // generates the world x-y-z axis for better understanding
-    // this.showWorldAxis(8);
-  }
+    // Rotate box around the y axis
+    box2.rotation.y = Math.PI / 3;
+
+    // Scaling on the x axis
+    box4.scaling.x = 2;
+
+    // Scaling on the y axis
+    box5.scaling.y = 2;
+
+    // Scaling on the y axis
+    box6.scaling.z = 2;
+
+    // Moving box7 relatively to box1
+    box7.parent = box1;
+    box7.position.z = -10;
+
+
+
+  // this.showWorldAxis(8);
+}
+
 
   animate(): void {
     const $scope = this;
@@ -59,6 +92,7 @@ export class SphereService {
    *
    * @param size number
    */
+
   showWorldAxis (size: number) {
     const $scope = this;
 
@@ -71,7 +105,7 @@ export class SphereService {
       material.backFaceCulling = false;
       material.specularColor = new BABYLON.Color3(0, 0, 0);
       material.diffuseTexture = dynamicTexture;
-      plane.material = material;
+      // plane.material = material;
 
       return plane;
     };
@@ -115,7 +149,9 @@ export class SphereService {
     axisZ.color = new BABYLON.Color3(0, 0, 1);
     const zChar = makeTextPlane('Z', 'blue', size / 10);
     zChar.position = new BABYLON.Vector3(0, 0.05 * size, 0.9 * size);
+
   }
+
 
   destroyScene() {
     this.scene.dispose();
